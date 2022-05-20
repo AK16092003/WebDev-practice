@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>CGPA CALCULATOR</title>
+	</head>
+
+<body bgcolor= "Aqua">
+
+<center><h2 style = "background-color:yellow;"><u><b>CGPA CALCULATOR</b></u></h2></center>
+<center><p id = "content"></p></center>
+
+<center>
+<button onclick = "calc()">SUBMIT</button>
+</center>
+
+<script>
+	
+	var subj = ["MAIR22","MEIR22","HSIR11","CSIR21","CSPC11","SWIR11","CHIR11","CHIR12"];
+	var subname = 
+				[
+				"Complexity Analysis and Differential Equations" , 
+				"Engineering Graphics" , 
+				"English for Communication" , 
+				"Essentials of Computer Science (Branch Specific Course)" , 
+				"Discrete Structures" , 
+				"NSS / NCC / NSO" , 
+				"Chemistry (Theory)" ,
+				"Chemistry (Lab)" , 
+				]
+	var cred = [ 3 , 3 , 4 , 2 , 4 , 0 , 3 , 2 ];
+	var content = `
+			<table border = "5px">
+			<tr><td><center>COURSE NAME</center></td><td><center>COURSE CODE</center></td><td><center>COURSE CREDITS</center></td><td><center>GRADES</center></td></tr>
+			`;
+	var sum = 0;
+	for (var i = 0 ; i < subj.length ; i ++ ){
+		content +=`
+			<tr>
+				<td><center>${subname[i]}</center></td>
+				<td><center><b>${subj[i]}</b></center></td>
+				<td><center><b>${cred[i]}</b></center></td>
+				<td><center>
+					<select id = "sub_${i}">
+						<option value = "10">S</option>
+						<option value = "9" >A</option>
+						<option value = "8" >B</option>
+						<option value = "7" >C</option>
+						<option value = "6" >D</option>
+						<option value = "5" >E</option>
+						<option value = "0" >F</option>
+					</select>
+					</center>
+				</td>
+			</tr>`;
+		sum += cred[i];
+	} 
+	content += "</table>"
+	document.getElementById("content").innerHTML = content;
+	
+	function calc(){
+		var count = subj.length;
+		var tot_cred = 0; 
+		for (var i = 0 ; i < count ; i ++){	
+			var grade1 = document.getElementById(`sub_${i}`).value;
+			tot_cred += parseInt(grade1)*cred[i]/10;
+		}
+		alert("Your CGPA = "+((tot_cred/sum)*10).toFixed(2));
+	}
+</script>
+</body>
+</html>
